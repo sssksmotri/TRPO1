@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище buro_propyskovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ID_client" />
+          </Key>
+          <Property Name="ID_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="id_propyska" Type="int" />
+        </EntityType>
+        <EntityType Name="propysk">
+          <Key>
+            <PropertyRef Name="ID_propyska" />
+          </Key>
+          <Property Name="ID_propyska" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naznachenie" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="varchar" MaxLength="100" />
+          <Property Name="Srok_ispolzovaniya" Type="varchar" MaxLength="100" />
+          <Property Name="ID_zayvki" Type="int" />
+        </EntityType>
+        <EntityType Name="zayvka">
+          <Key>
+            <PropertyRef Name="ID_zayvki" />
+          </Key>
+          <Property Name="ID_zayvki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_client" Type="int" />
+          <Property Name="Lastname" Type="varchar" MaxLength="255" />
+          <Property Name="Firstname" Type="varchar" MaxLength="255" />
+          <Property Name="Surname" Type="varchar" MaxLength="255" />
+          <Property Name="Date_podachi_zayvki" Type="date" />
+          <Property Name="Number_zayvki" Type="varchar" MaxLength="50" />
+          <Property Name="Naznachenie" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__client__id_propy__412EB0B6">
+          <End Role="propysk" Type="Self.propysk" Multiplicity="0..1" />
+          <End Role="client" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="propysk">
+              <PropertyRef Name="ID_propyska" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="id_propyska" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zayvka__ID_clien__440B1D61">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="zayvka" Type="Self.zayvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="zayvka">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_propysk_zayvka">
+          <End Role="zayvka" Type="Self.zayvka" Multiplicity="0..1" />
+          <End Role="propysk" Type="Self.propysk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zayvka">
+              <PropertyRef Name="ID_zayvki" />
+            </Principal>
+            <Dependent Role="propysk">
+              <PropertyRef Name="ID_zayvki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище buro_propyskovModelContainer">
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="propysk" EntityType="Self.propysk" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zayvka" EntityType="Self.zayvka" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__client__id_propy__412EB0B6" Association="Self.FK__client__id_propy__412EB0B6">
+            <End Role="propysk" EntitySet="propysk" />
+            <End Role="client" EntitySet="client" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zayvka__ID_clien__440B1D61" Association="Self.FK__zayvka__ID_clien__440B1D61">
+            <End Role="client" EntitySet="client" />
+            <End Role="zayvka" EntitySet="zayvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_propysk_zayvka" Association="Self.FK_propysk_zayvka">
+            <End Role="zayvka" EntitySet="zayvka" />
+            <End Role="propysk" EntitySet="propysk" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="buro_propyskovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="ID_client" />
+          </Key>
+          <Property Name="ID_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_propyska" Type="Int32" />
+          <NavigationProperty Name="propysk" Relationship="Self.FK__client__id_propy__412EB0B6" FromRole="client" ToRole="propysk" />
+          <NavigationProperty Name="zayvka" Relationship="Self.FK__zayvka__ID_clien__440B1D61" FromRole="client" ToRole="zayvka" />
+        </EntityType>
+        <EntityType Name="propysk">
+          <Key>
+            <PropertyRef Name="ID_propyska" />
+          </Key>
+          <Property Name="ID_propyska" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naznachenie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Srok_ispolzovaniya" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ID_zayvki" Type="Int32" />
+          <NavigationProperty Name="client" Relationship="Self.FK__client__id_propy__412EB0B6" FromRole="propysk" ToRole="client" />
+          <NavigationProperty Name="zayvka" Relationship="Self.FK_propysk_zayvka" FromRole="propysk" ToRole="zayvka" />
+        </EntityType>
+        <EntityType Name="zayvka">
+          <Key>
+            <PropertyRef Name="ID_zayvki" />
+          </Key>
+          <Property Name="ID_zayvki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_client" Type="Int32" />
+          <Property Name="Lastname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Surname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date_podachi_zayvki" Type="DateTime" Precision="0" />
+          <Property Name="Number_zayvki" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Naznachenie" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="client" Relationship="Self.FK__zayvka__ID_clien__440B1D61" FromRole="zayvka" ToRole="client" />
+          <NavigationProperty Name="propysk" Relationship="Self.FK_propysk_zayvka" FromRole="zayvka" ToRole="propysk" />
+        </EntityType>
+        <Association Name="FK__client__id_propy__412EB0B6">
+          <End Role="propysk" Type="Self.propysk" Multiplicity="0..1" />
+          <End Role="client" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="propysk">
+              <PropertyRef Name="ID_propyska" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="id_propyska" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__zayvka__ID_clien__440B1D61">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="zayvka" Type="Self.zayvka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="ID_client" />
+            </Principal>
+            <Dependent Role="zayvka">
+              <PropertyRef Name="ID_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_propysk_zayvka">
+          <End Role="zayvka" Type="Self.zayvka" Multiplicity="0..1" />
+          <End Role="propysk" Type="Self.propysk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="zayvka">
+              <PropertyRef Name="ID_zayvki" />
+            </Principal>
+            <Dependent Role="propysk">
+              <PropertyRef Name="ID_zayvki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="buro_propyskovEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="client" EntityType="Self.client" />
+          <EntitySet Name="propysk" EntityType="Self.propysk" />
+          <EntitySet Name="zayvka" EntityType="Self.zayvka" />
+          <AssociationSet Name="FK__client__id_propy__412EB0B6" Association="Self.FK__client__id_propy__412EB0B6">
+            <End Role="propysk" EntitySet="propysk" />
+            <End Role="client" EntitySet="client" />
+          </AssociationSet>
+          <AssociationSet Name="FK__zayvka__ID_clien__440B1D61" Association="Self.FK__zayvka__ID_clien__440B1D61">
+            <End Role="client" EntitySet="client" />
+            <End Role="zayvka" EntitySet="zayvka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_propysk_zayvka" Association="Self.FK_propysk_zayvka">
+            <End Role="zayvka" EntitySet="zayvka" />
+            <End Role="propysk" EntitySet="propysk" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище buro_propyskovModelContainer" CdmEntityContainer="buro_propyskovEntities2">
+          <EntitySetMapping Name="client">
+            <EntityTypeMapping TypeName="buro_propyskovModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="id_propyska" ColumnName="id_propyska" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="propysk">
+            <EntityTypeMapping TypeName="buro_propyskovModel.propysk">
+              <MappingFragment StoreEntitySet="propysk">
+                <ScalarProperty Name="ID_propyska" ColumnName="ID_propyska" />
+                <ScalarProperty Name="Naznachenie" ColumnName="Naznachenie" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Srok_ispolzovaniya" ColumnName="Srok_ispolzovaniya" />
+                <ScalarProperty Name="ID_zayvki" ColumnName="ID_zayvki" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zayvka">
+            <EntityTypeMapping TypeName="buro_propyskovModel.zayvka">
+              <MappingFragment StoreEntitySet="zayvka">
+                <ScalarProperty Name="ID_zayvki" ColumnName="ID_zayvki" />
+                <ScalarProperty Name="ID_client" ColumnName="ID_client" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Date_podachi_zayvki" ColumnName="Date_podachi_zayvki" />
+                <ScalarProperty Name="Number_zayvki" ColumnName="Number_zayvki" />
+                <ScalarProperty Name="Naznachenie" ColumnName="Naznachenie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

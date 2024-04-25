@@ -1,0 +1,60 @@
+﻿<Window x:Class="Pr_magazin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Pr_magazin"
+        mc:Ignorable="d"
+        WindowState="Maximized"  MinHeight="900" MinWidth="1570"
+        Title="Buro_propyskov" Height="1080" Width="1920">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Background="#232628">
+            <TextBlock Text="Бюро пропусков" Foreground="White" FontSize="60" FontFamily="Ink Free" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+            <StackPanel Background="CadetBlue" Width="150" Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBlock Text="Бюро" Foreground="White" FontSize="30" FontFamily="Ink Free" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                <Menu Height="450" Background="Transparent">
+                    <Menu.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </Menu.ItemsPanel>
+                    <MenuItem Header="Главная" Click="MenuItem_Click" Foreground="White" FontSize="20" FontFamily="Ink Free" Width="150" Margin="10">
+                        <MenuItem.Icon>
+                            <Image Source="Image/home.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Запросить пропуск" Click="MenuItem_Click_2" Foreground="White" FontSize="13" FontFamily="Ink Free" Width="150" Margin="10">
+                        <MenuItem.Icon>
+                            <Image Source="Image/propysk.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Поддержка" Click="MenuItem_Click_1" Foreground="White" FontSize="20" FontFamily="Ink Free" Width="150" Margin="8">
+                        <MenuItem.Icon>
+                            <Image Source="Image/support.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="О системе" Click="MenuItem_Click_5" Foreground="White" FontSize="20" FontFamily="Ink Free" Width="150" Margin="10">
+                        <MenuItem.Icon>
+                            <Image Source="Image/inf.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Выход" Click="MenuItem_Click_6" Foreground="White" FontSize="20" FontFamily="Ink Free" Width="150" Margin="10">
+                        <MenuItem.Icon>
+                            <Image Source="Image/exit.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+            <DataGrid x:Name="PropyskDataGrid" Width="1200" MinHeight="700" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center"
+          AutoGenerateColumns="False" Background="CadetBlue" BorderBrush="CadetBlue" BorderThickness="1" FontSize="20" Margin="0,30,0,0"
+          IsReadOnly="True" SelectionChanged="PropyskDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Назначение" Binding="{Binding Naznachenie}" Width="*" />
+                    <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="*" />
+                    <DataGridTextColumn Header="Срок использования" Binding="{Binding Srok_ispolzovaniya}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </ScrollViewer>
+</Window>
+
